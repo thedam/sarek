@@ -1,0 +1,72 @@
+{
+    "joint genotyping - three sample gvcfs - whole genome": {
+        "content": [
+            "VcfFile [chromosomes=[chr22], sampleCount=2, variantCount=4, phased=false, phasedAutodetect=false]",
+            [
+                "versions.yml:md5,2b61717dc0e45b24ad5f489d78075eee"
+            ]
+        ],
+        "timestamp": "2026-06-13T08:34:40.022928911",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
+        }
+    },
+    "joint genotyping - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "joint_genotyping",
+                            "patient": "all_samples",
+                            "variantcaller": "deepvariant"
+                        },
+                        "joint_genotyping.deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "joint_genotyping",
+                            "patient": "all_samples",
+                            "variantcaller": "deepvariant"
+                        },
+                        "joint_genotyping.deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,2b61717dc0e45b24ad5f489d78075eee"
+                ],
+                "genotype_index": [
+                    [
+                        {
+                            "id": "joint_genotyping",
+                            "patient": "all_samples",
+                            "variantcaller": "deepvariant"
+                        },
+                        "joint_genotyping.deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "genotype_vcf": [
+                    [
+                        {
+                            "id": "joint_genotyping",
+                            "patient": "all_samples",
+                            "variantcaller": "deepvariant"
+                        },
+                        "joint_genotyping.deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2b61717dc0e45b24ad5f489d78075eee"
+                ]
+            }
+        ],
+        "timestamp": "2026-06-13T08:34:51.461225607",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
+        }
+    }
+}

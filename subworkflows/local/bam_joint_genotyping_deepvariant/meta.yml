@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "bam_joint_genotyping_deepvariant"
+description: Cohort joint genotyping of DeepVariant gVCFs with GLnexus
+keywords:
+  - joint genotyping
+  - joint calling
+  - gvcf
+  - deepvariant
+  - glnexus
+  - cohort
+  - population
+components:
+  - glnexus
+  - bcftools/view
+input:
+  - gvcf:
+      type: file
+      description: |
+        Per-sample DeepVariant gVCF, one channel element per cohort sample.
+        Structure: [ val(meta), path(gvcf) ]
+      pattern: "*.{g.vcf.gz,gvcf.gz}"
+  - bed:
+      type: file
+      description: |
+        Optional BED of regions to restrict joint genotyping to (e.g. a shard
+        or a WES target). Use [ [id:'no_region'], [] ] for whole genome.
+        Structure: [ val(meta), path(bed) ]
+      pattern: "*.bed"
+output:
+  - genotype_vcf:
+      type: file
+      description: |
+        Multi-sample, bgzipped and tabix-indexed joint-genotyped VCF for the whole cohort.
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.vcf.gz"
+  - genotype_index:
+      type: file
+      description: |
+        Tabix index of the multi-sample joint-genotyped VCF.
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.vcf.gz.tbi"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@thedam"
+maintainers:
+  - "@thedam"
