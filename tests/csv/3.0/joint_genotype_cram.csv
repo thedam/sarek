@@ -1,0 +1,4 @@
+patient,status,sample,cram,crai
+test1,0,test1,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test.paired_end.sorted.cram,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test.paired_end.sorted.cram.crai
+test2,0,test2,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test2.paired_end.sorted.cram,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test2.paired_end.sorted.cram.crai
+test3,0,test3,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test.paired_end.sorted.cram,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/cram/test.paired_end.sorted.cram.crai

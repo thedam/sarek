@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `--joint_genotype` for cohort joint genotyping of DeepVariant gVCFs with GLnexus, producing a single multi-sample VCF that can be VEP-annotated through the existing `ANNOTATE` path. Includes the `BAM_JOINT_GENOTYPING_DEEPVARIANT` subworkflow, a `test_joint_genotype` profile and a prototype `gcp_batch` profile + scaling design notes.
+
 ### Changed
 
 ### Fixed
@@ -21,11 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
+| GLnexus    |             | 1.4.1       |
 
 ### Parameters
 
-| Params | status |
-| ------ | ------ |
+| Params             | status |
+| ------------------ | ------ |
+| `--joint_genotype` | New    |
 
 ### Developer section
 

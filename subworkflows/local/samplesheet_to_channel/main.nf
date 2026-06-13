@@ -18,6 +18,7 @@ workflow SAMPLESHEET_TO_CHANNEL {
     germline_resource             // Path: germline resource
     intervals                     // Path: intervals
     joint_germline                // Boolean: joint_germline
+    joint_genotype                // Boolean: joint_genotype (DeepVariant + GLnexus)
     joint_mutect2                 // Boolean: joint_mutect2
     known_indels                  // Path: known indels
     known_snps                    // Path: known snps
@@ -416,6 +417,11 @@ Joint germline variant calling also requires intervals in order to genotype the 
         error("When using Sentieon Haplotyper for joint-germline variant-calling the option `--sentieon_haplotyper_emit_mode` has to include `gvcf`.")
     }
 
+
+    // Fails when --joint_genotype is used without enabling deepvariant
+    if (joint_genotype && (!tools || !tools.split(',').contains('deepvariant'))) {
+        error("Cohort joint genotyping with GLnexus (`--joint_genotype`) requires DeepVariant. Please add `--tools deepvariant` to the nextflow command.")
+    }
 
     // Fails when --joint_mutect2 is used without enabling mutect2
     if (joint_mutect2 && (!tools || !tools.split(',').contains('mutect2'))) {

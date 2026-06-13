@@ -1,0 +1,70 @@
+nextflow_workflow {
+
+    name "Test Subworkflow BAM_JOINT_GENOTYPING_DEEPVARIANT"
+    script "../main.nf"
+    workflow "BAM_JOINT_GENOTYPING_DEEPVARIANT"
+    config "./nextflow.config"
+
+    tag "subworkflows"
+    tag "subworkflows_local"
+    tag "bam_joint_genotyping_deepvariant"
+    tag "glnexus"
+    tag "bcftools/view"
+
+    test("joint genotyping - three sample gvcfs - whole genome") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [ [ id:'sample1' ], file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/gvcf/test.genome.vcf.gz', checkIfExists: true) ],
+                    [ [ id:'sample2' ], file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/gvcf/test2.genome.vcf.gz', checkIfExists: true) ]
+                )
+                input[1] = [ [ id:'no_region' ], [] ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // One multi-sample VCF for the whole cohort
+                { assert workflow.out.genotype_vcf.size() == 1 },
+                { assert workflow.out.genotype_vcf.get(0).get(0).id == 'joint_genotyping' },
+                { assert workflow.out.genotype_vcf.get(0).get(1).endsWith('.vcf.gz') },
+                // Tabix index emitted alongside it
+                { assert workflow.out.genotype_index.size() == 1 },
+                { assert workflow.out.genotype_index.get(0).get(1).endsWith('.vcf.gz.tbi') },
+                // Stable assertions: variant content of the joint VCF + versions
+                { assert snapshot(
+                    path(workflow.out.genotype_vcf.get(0).get(1)).vcf.summary,
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("joint genotyping - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [ [ id:'sample1' ], file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/gvcf/test.genome.vcf.gz', checkIfExists: true) ],
+                    [ [ id:'sample2' ], file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/gvcf/test2.genome.vcf.gz', checkIfExists: true) ]
+                )
+                input[1] = [ [ id:'no_region' ], [] ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

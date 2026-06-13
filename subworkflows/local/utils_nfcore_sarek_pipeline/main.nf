@@ -168,6 +168,7 @@ workflow PIPELINE_INITIALISATION {
         params.germline_resource,
         params.intervals,
         params.joint_germline,
+        params.joint_genotype,
         params.joint_mutect2,
         params.known_indels,
         params.known_snps,
